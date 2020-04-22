@@ -20,7 +20,9 @@ from updates.views import (json_example_view,
                            JsonCBV,
                            JsonCBV2,
                            SerializedListView,
-                           SerializedDetailView)
+                           SerializedDetailView,
+                           SerializedListView2,
+                           SerializedDetailView2)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +33,8 @@ urlpatterns = [
 
     path('json/serialized/list', SerializedListView.as_view()),
     path('json/serialized/detail', SerializedDetailView.as_view()),
+
+    path('json/serialized/list2', SerializedListView2.as_view()),
+    path('json/serialized/detail2', SerializedDetailView2.as_view()),
 
 ]
