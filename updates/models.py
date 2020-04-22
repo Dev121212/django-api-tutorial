@@ -9,13 +9,19 @@ from django.core.serializers import serialize
 
 class UpdateQuerySet(models.QuerySet):
     # For entire query set
+    # def serialize(self):
+    #     qs = self
+    #     final_array = []
+    #     for obj in qs:
+    #         stuct = json.loads(obj.serialize())
+    #         final_array.append(stuct)
+    #     return json.dumps(final_array)
+
+    # New short method
     def serialize(self):
-        qs = self
-        final_array = []
-        for obj in qs:
-            stuct = json.loads(obj.serialize())
-            final_array.append(stuct)
-        return json.dumps(final_array)
+        list_values = list(self.values('user', 'content', 'image'))
+        print(list_values)
+        return json.dumps(list_values)
 
 
 class UpdateManager(models.Manager):
@@ -42,11 +48,24 @@ class Update(models.Model):
     def __str__(self):
         return self.content or ""
 
+    #     # For an instance
+    # def serialize(self):
+    #     json_data = serialize(
+    #         'json', [self], fields=('user', 'content', 'image'))
+    #     stuct = json.loads(json_data)
+    #     print(stuct)
+    #     data = json.dumps(stuct[0]['fields'])
+    #     return data
+
+    # New short method
     def serialize(self):
-        # For an instance
-        json_data = serialize(
-            'json', [self], fields=('user', 'content', 'image'))
-        stuct = json.loads(json_data)
-        print(stuct)
-        data = json.dumps(stuct[0]['fields'])
-        return data
+        try:
+            image = self.image.url
+        except:
+            image = ""
+        data = {
+            'user': self.user.id,
+            'content': self.content,
+            'image': image
+        }
+        return json.dumps(data)
