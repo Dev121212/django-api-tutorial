@@ -64,9 +64,9 @@ class Update(models.Model):
         except:
             image = ""
         data = {
-            'id': self.id,
-            'user': self.user.id,
-            'content': self.content,
-            'image': image
+            "id": self.id,
+            "content": self.content,
+            "user": self.user.id,
+            "image": image
         }
         return json.dumps(data)

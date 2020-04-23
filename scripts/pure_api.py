@@ -33,19 +33,31 @@ def create_update():
 
 
 # print(get_list())
-print(create_update())
+# print(create_update())
 
 
 def do_obj_update():
     new_data = {
-        'content': 'New obj data'
+        'content': 'Some content'
     }
-    r = requests.put(BASE_URL + ENDPOINT + "1/", data=new_data)
-    print(r.statu_)
+    r = requests.put(BASE_URL + ENDPOINT + "12/", data=json.dumps(new_data))
+    print(r.status_code)
     if r.status_code == requests.codes.ok:
         # print(r.json())
         return r.json()
     return r.text
 
 
-# print(do_obj_update())
+def do_obj_delete():
+    new_data = {
+        'content': 'Some content'
+    }
+    r = requests.delete(BASE_URL + ENDPOINT + "9/")
+    print(r.status_code)
+    if r.status_code == requests.codes.ok:
+        # print(r.json())
+        return r.json()
+    return r.text
+
+
+print(do_obj_delete())
