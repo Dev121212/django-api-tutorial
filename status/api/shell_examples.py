@@ -1,3 +1,4 @@
+from rest_framework import serializers
 from django.utils.six import BytesIO
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -53,3 +54,18 @@ print(create_obj)
 obj = Status.objects.last()
 get_data_serializer = StatusSerializer(obj)
 obj.delete()
+
+
+# Custom Serializer
+
+
+class CustomSerializer(serializers.Serializer):
+    content = serializers.CharField()
+    email = serializers.EmailField()
+
+
+data = {'email': 'hello@teamcfe.in', 'content': 'Please delete me'}
+create_obj_serializer = CustomSerializer(data=data)
+if create_obj_serializer.is_valid():
+    valid_data = create_obj_serializer.data
+    print(valid_data)
