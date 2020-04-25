@@ -39,3 +39,34 @@ class StatusCreateAPIView(generics.CreateAPIView):
     authentication_classes = []
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
+
+
+class StatusDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+    # * If your passing the arguement 'id' in the path the 'lookup_field' is required.
+    # * Otherwise in path write '<pk>'
+    # lookup_field = 'id'
+
+    # * If you don't want to use 'lookup_field' and have passed 'id' in path, then use this function
+    # def get_object(self, *args, **kwargs):
+    #     kwargs = self.kwargs
+    #     kw_id = kwargs.get('id')
+    #     return Status.objects.get(id=kw_id)
+
+
+class StatusUpdateAPIView(generics.UpdateAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+
+class StatusDeleteAPIView(generics.DestroyAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
