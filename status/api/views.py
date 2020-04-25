@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, mixins
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -19,6 +19,9 @@ class StatusListSearchAPIView(APIView):  # Making our own view
         qs = Status.objects.all()
         serializer = StatusSerializer(qs, many=True)
         return Response(serializer.data)
+
+# CreateModelMixin handles post data
+# UpdateModelMixin handles put data
 
 
 class StatusAPIView(generics.ListAPIView):  # Using generic APIView
@@ -41,11 +44,33 @@ class StatusCreateAPIView(generics.CreateAPIView):
     serializer_class = StatusSerializer
 
 
-class StatusDetailAPIView(generics.RetrieveAPIView):
+# class StatusDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+'''
+All three Retrieve, Update, Destroy at once place
+'''
+#     permission_classes = []
+#     authentication_classes = []
+#     queryset = Status.objects.all()
+#     serializer_class = StatusSerializer
+
+
+class StatusDetailAPIView(generics.RetrieveAPIView,
+                          mixins.CreateModelMixin,
+                          mixins.DestroyModelMixin,
+                          mixins.UpdateModelMixin,):
     permission_classes = []
     authentication_classes = []
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
     # * If your passing the arguement 'id' in the path the 'lookup_field' is required.
     # * Otherwise in path write '<pk>'

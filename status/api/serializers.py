@@ -11,7 +11,8 @@ Serializers -> Validate Data
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ['user',
+        fields = ['id',
+                  'user',
                   'content',
                   'image']
     # For single field
