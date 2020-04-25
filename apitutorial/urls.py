@@ -27,17 +27,18 @@ from updates.views import (json_example_view,
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/updates/', include('updates.api.urls')),
+    path('api/status/', include('status.api.urls')),
 
 
-    path('json/example', json_example_view),
+    # path('json/example', json_example_view),
 
-    path('json/cbv', JsonCBV.as_view()),
-    path('json/cbv2', JsonCBV2.as_view()),
+    # path('json/cbv', JsonCBV.as_view()),
+    # path('json/cbv2', JsonCBV2.as_view()),
 
-    path('json/serialized/list', SerializedListView.as_view()),
-    path('json/serialized/detail', SerializedDetailView.as_view()),
+    # path('json/serialized/list', SerializedListView.as_view()),
+    # path('json/serialized/detail', SerializedDetailView.as_view()),
 
-    path('json/serialized/list2', SerializedListView2.as_view()),
-    path('json/serialized/detail2', SerializedDetailView2.as_view()),
+    # path('json/serialized/list2', SerializedListView2.as_view()),
+    # path('json/serialized/detail2', SerializedDetailView2.as_view()),
 
 ]
