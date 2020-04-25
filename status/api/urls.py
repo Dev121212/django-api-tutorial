@@ -24,8 +24,8 @@ from .views import (StatusListSearchAPIView,
 
 urlpatterns = [
     path('', StatusAPIView.as_view()),
-    path('create/', StatusCreateAPIView.as_view()),
-    path('<pk>/', StatusDetailAPIView.as_view()),
+    # path('create/', StatusCreateAPIView.as_view()),
+    # path('<pk>/', StatusDetailAPIView.as_view()),
     # path('<pk>/update/', StatusUpdateAPIView.as_view()),
     # path('<pk>/delete/', StatusDeleteAPIView.as_view()),
 ]
