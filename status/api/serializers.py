@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from status.models import Status
+from accounts.api.serializers import UserPublicSerializer
 
 '''
 Serializers -> JSON
@@ -9,12 +10,18 @@ Serializers -> Validate Data
 
 
 class StatusSerializer(serializers.ModelSerializer):
+    uri = serializers.SerializerMethodField(read_only=True)
+    user = UserPublicSerializer(read_only=True)
+
     class Meta:
         model = Status
-        fields = ['id',
-                  'user',
-                  'content',
-                  'image']
+        fields = [
+            'uri',
+            'id',
+            'user',
+            'content',
+            'image'
+        ]
         read_only_fields = ['user']  # GET
 
     # For single field
@@ -22,6 +29,9 @@ class StatusSerializer(serializers.ModelSerializer):
     #     if len(value) > 10000:
     #         raise serializers.ValidationError("This is way too long.")
     #     return value
+
+    def get_uri(self, obj):
+        return "/api/status/{id}/".format(id=obj.id)
 
     def validate(self, data):
         content = data.get("content", None)

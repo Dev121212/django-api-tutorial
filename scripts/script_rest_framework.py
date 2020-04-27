@@ -38,11 +38,11 @@ with open(image_path, 'rb') as image:
     file_data = {
         'image': image
     }
-    r = requests.put(
+    r = requests.get(
         ENDPOINT,
-        data=data2,
+        # data=data2,
         headers=headers2,
-        files=file_data,
+        # files=file_data,
     )
     # r = requests.post(
     #     B_ENDPOINT,
