@@ -13,8 +13,8 @@ headers = {
     # "Authorization": "JWT "+,
 }
 data = {
-    "username": "abc4",
-    "email": "abc4@smilebots.com",
+    "username": "abc7",
+    "email": "abc7@smilebots.com",
     "password": "nokialumia",
     'password2': 'nokialumia',
 }
