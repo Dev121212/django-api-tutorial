@@ -20,7 +20,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         style={'input-type': 'password'}, write_only=True)
     token = serializers.SerializerMethodField(read_only=True)
     expires = serializers.SerializerMethodField(read_only=True)
-    token_response = serializers.SerializerMethodField(read_only=True)
+    message = serializers.SerializerMethodField(read_only=True)
+    # token_response = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -31,19 +32,26 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             'password2',
             'token',
             'expires',
-            'token_response'
+            'message',
+            # 'token_response'
         ]
         extra_kwargs = {
             'password': {'write_only': True}
         }
 
-    def get_token_response(self, obj):
-        user = obj
-        payload = jwt_payload_handler(user)
-        token = jwt_encode_handler(payload)
-        response = jwt_response_payload_handler(
-            token, user, request=None)
-        return response
+    # def get_token_response(self, obj):
+    #     user = obj
+    #     payload = jwt_payload_handler(user)
+    #     token = jwt_encode_handler(payload)
+    #     context = self.context
+    #     request = context['request']
+    #     print(request.user.is_authenticated)
+    #     response = jwt_response_payload_handler(
+    #         token, user, request=request)
+    #     return response
+
+    def get_message(self, obj):
+        return "Thank you for registering. Please enter your email before continuing."
 
     def get_expires(self, obj):
         return timezone.now() + expire_delta - datetime.timedelta(seconds=200)
@@ -82,5 +90,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             email=validate_data.get('email')
         )
         user_obj.set_password(validate_data.get('password'))
+        user_obj.is_active = False
         user_obj.save()
         return user_obj
