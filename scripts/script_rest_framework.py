@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
 REFRESH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/refresh/"
 ENDPOINT = "http://127.0.0.1:8000/api/status/"
 
@@ -20,38 +20,38 @@ r = requests.post(
     data=json.dumps(data),
     headers=headers
 )
-token = r.json()['token']
+token = r.json()  # ['token']
 print(token)
 
-headers = {
-    # "Content-Type": "application/json",
-    "Authorization": "JWT "+token,
-}
-with open(image_path, 'rb') as image:
-    file_data = {
-        'image': image
-    }
-    data = {
-        'content': 'Some random content'
-    }
-    json_data = json.dumps(data)
-    posted_response = requests.put(
-        ENDPOINT + str(32) + "/", data=data, headers=headers, files=file_data)
-    print(posted_response.text)
+# headers = {
+#     # "Content-Type": "application/json",
+#     "Authorization": "JWT "+token,
+# }
+# with open(image_path, 'rb') as image:
+#     file_data = {
+#         'image': image
+#     }
+#     data = {
+#         'content': 'Some random content'
+#     }
+#     json_data = json.dumps(data)
+#     posted_response = requests.put(
+#         ENDPOINT + str(32) + "/", data=data, headers=headers, files=file_data)
+#     print(posted_response.text)
 
 
-headers = {
-    # "Content-Type": "application/json",
-    "Authorization": "JWT "+token,
-}
+# headers = {
+#     # "Content-Type": "application/json",
+#     "Authorization": "JWT "+token,
+# }
 
-data = {
-    'content': 'New content'
-}
-json_data = json.dumps(data)
-posted_response = requests.put(
-    ENDPOINT + str(32) + "/", data=data, headers=headers)
-print(posted_response.text)
+# data = {
+#     'content': 'New content'
+# }
+# json_data = json.dumps(data)
+# posted_response = requests.put(
+#     ENDPOINT + str(32) + "/", data=data, headers=headers)
+# print(posted_response.text)
 
 # refresh_data = {
 #     'token': token
