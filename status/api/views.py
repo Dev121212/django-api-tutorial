@@ -7,6 +7,7 @@ import json
 
 from status.models import Status
 from .serializers import StatusSerializer
+from accounts.api.permissions import IsOwnerOrReadOnly
 
 
 # class StatusListSearchAPIView(APIView):  # Making our own view
@@ -41,7 +42,10 @@ class StatusDetailAPIView(
         mixins.DestroyModelMixin,
         generics.RetrieveAPIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    ]
     serializer_class = StatusSerializer
     queryset = Status.objects.all()
     lookup_field = 'id'

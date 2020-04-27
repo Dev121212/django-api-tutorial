@@ -2,29 +2,80 @@ import requests
 import json
 import os
 
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"
+
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
 REFRESH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/refresh/"
-ENDPOINT = "http://127.0.0.1:8000/api/status/"
 
 image_path = os.path.join(os.getcwd(), "logo.png")
 
 headers = {
     "Content-Type": "application/json",
-    "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNCwidXNlcm5hbWUiOiJhYmMxMSIsImV4cCI6MTU4Nzk4ODAzNCwiZW1haWwiOiJhYmMxMUBzbWlsZWJvdHMuY29tIiwib3JpZ19pYXQiOjE1ODc5ODc3MzR9.1iPHVYwme1fpAN3DEnTBmObKXl7iLscmpvSlExipBzM',
 }
 data = {
-    "username": "abc11",
-    "email": "abc11@smilebots.com",
+    "username": "devendra",
     "password": "nokialumia",
-    'password2': 'nokialumia',
 }
 r = requests.post(
     AUTH_ENDPOINT,
     data=json.dumps(data),
     headers=headers
 )
-token = r.json()  # ['token']
+token = r.json()['token']
 print(token)
+
+B_ENDPOINT = "http://127.0.0.1:8000/api/status/"
+ENDPOINT = B_ENDPOINT + "23/"
+
+headers2 = {
+    # "Content-Type": "application/json",
+    "Authorization": "JWT " + token
+}
+data2 = {
+    "content": "This is new content"
+}
+
+with open(image_path, 'rb') as image:
+    file_data = {
+        'image': image
+    }
+    r = requests.put(
+        ENDPOINT,
+        data=data2,
+        headers=headers2,
+        files=file_data,
+    )
+    # r = requests.post(
+    #     B_ENDPOINT,
+    #     data=data2,
+    #     headers=headers2,
+    #     files=file_data,
+    # )
+    print(r.text)
+
+
+# AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"
+# REFRESH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/refresh/"
+# ENDPOINT = "http://127.0.0.1:8000/api/status/"
+
+# image_path = os.path.join(os.getcwd(), "logo.png")
+
+# headers = {
+#     "Content-Type": "application/json",
+#     "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNCwidXNlcm5hbWUiOiJhYmMxMSIsImV4cCI6MTU4Nzk4ODAzNCwiZW1haWwiOiJhYmMxMUBzbWlsZWJvdHMuY29tIiwib3JpZ19pYXQiOjE1ODc5ODc3MzR9.1iPHVYwme1fpAN3DEnTBmObKXl7iLscmpvSlExipBzM',
+# }
+# data = {
+#     "username": "abc11",
+#     "email": "abc11@smilebots.com",
+#     "password": "nokialumia",
+#     'password2': 'nokialumia',
+# }
+# r = requests.post(
+#     AUTH_ENDPOINT,
+#     data=json.dumps(data),
+#     headers=headers
+# )
+# token = r.json()  # ['token']
+# print(token)
 
 # headers = {
 #     # "Content-Type": "application/json",
