@@ -10,11 +10,11 @@ image_path = os.path.join(os.getcwd(), "logo.png")
 
 headers = {
     "Content-Type": "application/json",
-    # "Authorization": "JWT "+,
+    "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNCwidXNlcm5hbWUiOiJhYmMxMSIsImV4cCI6MTU4Nzk4ODAzNCwiZW1haWwiOiJhYmMxMUBzbWlsZWJvdHMuY29tIiwib3JpZ19pYXQiOjE1ODc5ODc3MzR9.1iPHVYwme1fpAN3DEnTBmObKXl7iLscmpvSlExipBzM',
 }
 data = {
-    "username": "abc10",
-    "email": "abc10@smilebots.com",
+    "username": "abc11",
+    "email": "abc11@smilebots.com",
     "password": "nokialumia",
     'password2': 'nokialumia',
 }
