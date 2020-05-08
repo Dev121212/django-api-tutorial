@@ -3,4 +3,5 @@ from rest_framework import pagination
 
 # PageNumberPagination):
 class TESTAPIPagination(pagination.LimitOffsetPagination):
-    max_limit = 3
+    page_size = 5
+    # max_limit = 3

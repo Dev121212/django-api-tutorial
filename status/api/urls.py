@@ -26,7 +26,7 @@ from .views import (
 
 urlpatterns = [
     path('', StatusAPIView.as_view()),
-    path('<id>/', StatusDetailAPIView.as_view()),
+    path('<id>/', StatusDetailAPIView.as_view(), name="detail"),
 
     # path('create/', StatusCreateAPIView.as_view()),
     # path('<pk>/update/', StatusUpdateAPIView.as_view()),

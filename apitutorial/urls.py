@@ -30,7 +30,8 @@ urlpatterns = [
     path('api/user/', include(('accounts.api.user.urls', 'test'),
                               namespace='api-user')),
     path('api/updates/', include('updates.api.urls')),
-    path('api/status/', include('status.api.urls')),
+    path('api/status/', include(('status.api.urls', 'test2'),
+                                namespace='api-status')),
 
 
     # path('json/example', json_example_view),

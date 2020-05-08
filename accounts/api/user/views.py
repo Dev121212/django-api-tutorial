@@ -15,7 +15,7 @@ from rest_framework.response import Response
 User = get_user_model()
 
 
-class UserDetialAPIView(generics.RetrieveAPIView):
+class UserDetailAPIView(generics.RetrieveAPIView):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserDetailSerializer
