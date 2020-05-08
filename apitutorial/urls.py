@@ -27,6 +27,8 @@ from updates.views import (json_example_view,
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('accounts.api.urls')),
+    path('api/user/', include(('accounts.api.user.urls', 'test'),
+                              namespace='api-user')),
     path('api/updates/', include('updates.api.urls')),
     path('api/status/', include('status.api.urls')),
 
