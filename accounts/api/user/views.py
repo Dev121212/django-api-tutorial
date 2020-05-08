@@ -1,10 +1,14 @@
+from status.api.serializers import StatusInlineUserSerializer
+from status.models import Status
+from accounts.api.permissions import AnonPermission
 from .serializers import UserDetailSerializer
 from django.contrib.auth import get_user_model
-from rest_framework import generics, permissions
-from accounts.api.permissions import AnonPermission
+from rest_framework import(
+    generics,
+    permissions,
+    # pagination,
+)
 
-from status.models import Status
-from status.api.serializers import StatusInlineUserSerializer
 
 User = get_user_model()
 
@@ -18,9 +22,14 @@ class UserDetialAPIView(generics.RetrieveAPIView):
     def get_serializer_context(self):
         return {'request': self.request}
 
+# * Applying pagination in a single list view
+# class TESTAPIPagination(pagination.PageNumberPagination):
+#     page_size = 5
+
 
 class UserStatusAPIView(generics.ListAPIView):
     serializer_class = StatusInlineUserSerializer
+    # pagination_class = TESTAPIPagination
 
     def get_queryset(self, *srgs, **kwargs):
         username = self.kwargs.get("username", None)
