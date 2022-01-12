@@ -17,7 +17,7 @@ Markdown==3.2.1
 mccabe==0.6.1
 olefile==0.46
 Pillow==8.2.0
-pipenv==2018.11.26
+pipenv==2022.1.8
 pycodestyle==2.5.0
 pycparser==2.20
 pylint==2.4.4
